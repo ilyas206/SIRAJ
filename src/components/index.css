@@ -8,6 +8,55 @@
   font-style: normal;
 }
 
+.home {
+  background-color: #1e293b; 
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.fanoos-wrapper {
+  position: absolute;
+  top: 0;          
+  right: 82px;     
+  z-index: 10;
+  transform-origin: top center;
+  animation: naturalSwing 6s ease-in-out infinite;
+}
+
+.fanoos {
+  width: 70px;
+  opacity: 0.8;
+  position: relative;
+  z-index: 2;
+}
+
+/* THE CORD */
+.fanoos-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 75px;   
+  background: linear-gradient(
+    to bottom,
+    #5a4a1d,
+    #b89b59,
+    #fee19c
+  );
+  opacity: 0.9;
+}
+
+@keyframes naturalSwing {
+  25%  { transform: rotate(2.8deg) translateY(1px); }
+  75%  { transform: rotate(-2.8deg) translateY(1px); }
+}
+
+
+
 .dot-spinner {
   --uib-size: 2.8rem;
   --uib-speed: .9s;
