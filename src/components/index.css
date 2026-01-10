@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* color: #e2e8f0; */
+
 *{
   font-family: "Rubik", sans-serif;
   font-optical-sizing: auto;
@@ -14,6 +16,13 @@
     linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
+}
+
+.font_kufi{
+  font-family: "Reem Kufi", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
 
 .fanoos-wrapper {

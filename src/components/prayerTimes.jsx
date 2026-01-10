@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ARABICTRANSLATION, PRAYER_METHODS } from "../constants/consts"
+import { ARABICTRANSLATION, PRAYER_METHODS } from "../data/consts"
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -107,11 +107,11 @@ export default function PrayerTimes(){
     }
 
     return(
-        <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="w-full text-slate-200 p-4">
+        <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="relative w-full text-slate-200 p-4">
             {
                 isLoading
                 &&
-                <div className="fixed inset-0 z-50 flex items-center justify-center gap-4">
+                <div className="absolute inset-x-0 top-0 h-52 md:inset-0 md:h-[calc(100vh-88px)] z-50 flex items-center justify-center gap-4">
                     <div className="dot-spinner">
                         <div className="dot-spinner__dot"></div>
                         <div className="dot-spinner__dot"></div>
@@ -133,7 +133,7 @@ export default function PrayerTimes(){
                         <span className="font-thin">{handleTranslation('Prayer Times in')}</span>
                         <h1 className="my-1">{prayerData.data.timezone.name}</h1>
                     </div>
-                    <div className="bg-slate-600 col-span-2 p-3 rounded-md">
+                    <div className="bg-slate-600/40 col-span-3 md:col-span-2 p-3 rounded-md">
                         <FormControl
                             variant="standard"
                             sx={{ m: 1, minWidth: 120, width: '100%' }}   
@@ -201,77 +201,78 @@ export default function PrayerTimes(){
                             </Select>
                         </FormControl>
                     </div>
-                    <div className="bg-slate-600 row-span-2 p-4 flex flex-col justify-center rounded-md text-center">
+                    <div className="bg-slate-600/40 row-span-2 col-span-3 md:col-span-1 p-4 flex flex-col justify-center rounded-md text-center">
                         <h2 className="font-bold text-xlg">{handleWeekdayTranslation()}</h2>
                         <hr />
                         <h4 className="font-thin text-lg">{handleMonthTranslation()}</h4>
                     </div>
-                    <div className="bg-slate-600 col-span-2 p-3 flex flex-col items-center justify-center rounded-md">
-                        <h3 className="flex items-center gap-3"><img src="/assets/images/world.svg" alt="World map" className="w-8 h-8" /> {prayerData.data.timezone.name} {prayerData.data.timezone.utc_offset} {prayerData.data.timezone.abbreviation}</h3>
-                        <h3 className="font-thin text-lg flex items-center gap-2"><img src="/assets/images/calendar.svg" alt="World map" className="w-5 h-5" />{handleDateTranslation()}</h3>
+                    <div className="bg-slate-600/40 col-span-3 md:col-span-2 p-3 flex flex-col items-center justify-center rounded-md">
+                        <h3 className="flex items-center gap-3"><img src="/assets/icons/world.svg" alt="World map" className="w-8 h-8" /> {prayerData.data.timezone.name} {prayerData.data.timezone.utc_offset} {prayerData.data.timezone.abbreviation}</h3>
+                        <h3 className="font-thin text-lg flex items-center gap-2"><img src="/assets/icons/calendar.svg" alt="World map" className="w-5 h-5" />{handleDateTranslation()}</h3>
                     </div>
-                    <div className="bg-slate-600 col-span-3 flex justify-around items-center p-3 rounded-md">
+                    <div className="bg-slate-600/40 col-span-3 flex justify-around items-center p-3 rounded-md">
                         <div className="flex flex-col justify-center items-center p-3">
-                            <img src="assets/images/sunrise.png" alt="Fajr prayer" className="w-10 h-10 mb-2" />
+                            <img src="assets/icons/sunrise.png" alt="Fajr prayer" className="w-8 h-8 md:w-10 md:h-10 mb-2" />
                             <p className="font-bold">{handleTranslation('Fajr')}</p>
                             <p className="font-thin text-lg">{prayerData.data.times.Fajr || '--:--'}</p>
                         </div>
                         <div className="flex flex-col justify-center items-center p-3">
-                            <img src="/assets/images/sun_dhuhr.svg" alt="Dhuhr prayer" className="w-10 h-10 mb-2" />
+                            <img src="/assets/icons/sun_dhuhr.svg" alt="Dhuhr prayer" className="w-8 h-8 md:w-10 md:h-10 mb-2" />
                             <p className="font-bold">{handleTranslation('Dhuhr')}</p>
                             <p className="font-thin text-lg">{prayerData.data.times.Dhuhr || '--:--'}</p>
                         </div>
                         <div className="flex flex-col justify-center items-center p-3">
-                            <img src="/assets/images/sun_asr.svg" alt="Asr prayer" className="w-10 h-10 mb-2" />
+                            <img src="/assets/icons/sun_asr.svg" alt="Asr prayer" className="w-8 h-8 md:w-10 md:h-10 mb-2" />
                             <p className="font-bold">{handleTranslation('Asr')}</p>
                             <p className="font-thin text-lg">{prayerData.data.times.Asr || '--:--'}</p>
                         </div>
                         <div className="flex flex-col justify-center items-center p-3">
-                            <img src="assets/images/sunset.png" alt="Maghrib prayer" className="w-10 h-10 mb-2" />
+                            <img src="assets/icons/sunset.png" alt="Maghrib prayer" className="w-8 h-8 md:w-10 md:h-10 mb-2" />
                             <p className="font-bold">{handleTranslation('Maghrib')}</p>
                             <p className="font-thin text-lg">{prayerData.data.times.Maghrib || '--:--'}</p>
                         </div>
                         <div className="flex flex-col justify-center items-center p-3">
-                            <img src="/assets/images/isha.svg" alt="Isha prayer" className="w-10 h-10 mb-2" />
+                            <img src="/assets/icons/isha.svg" alt="Isha prayer" className="w-8 h-8 md:w-10 md:h-10 mb-2" />
                             <p className="font-bold">{handleTranslation('Isha')}</p>
                             <p className="font-thin text-lg">{prayerData.data.times.Isha || '--:--'}</p>
                         </div>
                     </div>
-                    <div className="bg-slate-600 row-span-2 flex flex-col justify-around p-3 rounded-md">
-                        <h3 className="flex items-center gap-2">{handleTranslation('Prohibited Times')} <img src="/assets/images/prohibition.svg" alt="Prohibition" className="w-8 h-8" /></h3>
-                        <h5 className="text-lg font-light">{handleTranslation('Sunrise')}</h5>
-                        <div className="flex justify-around items-center bg-slate-300 rounded-md text-slate-800 p-2 my-1">
+                    <div className="bg-slate-600/40 col-span-3 md:col-span-1 p-3 flex flex-col justify-around gap-3 md:gap-0 rounded-md">
+                        <div className="flex items-center justify-around">
+                            <span className="text-base md:text-lg">{handleTranslation('Sunrise')}</span>
+                            <span className="font-thin text-lg">{prayerData.data.times.Sunrise}</span>
+                        </div>
+                        <div className="flex items-center justify-around">
+                            <span className="text-base md:text-lg">{handleTranslation('Sunset')}</span>
+                            <span className="font-thin text-lg">{prayerData.data.times.Sunset}</span>
+                        </div>
+                    </div>
+                    <div className="bg-slate-600/40 row-span-2 col-span-3 md:col-span-2 flex flex-col justify-around p-3 rounded-md">
+                        <h3 className="flex items-center gap-2">{handleTranslation('Prohibited Times')} <img src="/assets/icons/prohibition.svg" alt="Prohibition" className="w-8 h-8" /></h3>
+                        <h5 className="text-base md:text-lg font-light">{handleTranslation('Sunrise')}</h5>
+                        <div className="flex justify-around items-center bg-slate-300/70 rounded-md text-slate-800 p-2 my-1">
                             <span className="font-bold">{handleTranslation('Start')} - {prayerData.data.prohibited_times.sunrise.start}</span>
                             <span className="font-bold">{handleTranslation('End')} - {prayerData.data.prohibited_times.sunrise.end}</span>
                         </div>
-                        <h5 className="text-lg font-light">{handleTranslation('Noon')}</h5>
-                        <div className="flex justify-around items-center bg-slate-300 rounded-md text-slate-800 p-2 my-1">
+                        <h5 className="text-base md:text-lg font-light mt-3">{handleTranslation('Noon')}</h5>
+                        <div className="flex justify-around items-center bg-slate-300/70 rounded-md text-slate-800 p-2 my-1">
                             <span className="font-bold">{handleTranslation('Start')} - {prayerData.data.prohibited_times.noon.start}</span>
                             <span className="font-bold">{handleTranslation('End')} - {prayerData.data.prohibited_times.noon.end}</span>
                         </div>
-                        <h5 className="text-lg font-light">{handleTranslation('Sunset')}</h5>
-                        <div className="flex justify-around items-center bg-slate-300 rounded-md text-slate-800 p-2 my-1">
+                        <h5 className="text-base md:text-lg font-light mt-3">{handleTranslation('Sunset')}</h5>
+                        <div className="flex justify-around items-center bg-slate-300/70 rounded-md text-slate-800 p-2 my-1">
                             <span className="font-bold">{handleTranslation('Start')} - {prayerData.data.prohibited_times.sunset.start}</span>
                             <span className="font-bold">{handleTranslation('End')} - {prayerData.data.prohibited_times.sunset.end}</span>
                         </div>
                     </div>
-                    <div className="bg-slate-600 col-span-2 p-3 flex flex-col justify-around rounded-md">
-                        <div className="flex items-center justify-around">
-                            <h5>{handleTranslation('Sunrise')}</h5>
-                            <span className="font-thin text-lg">{prayerData.data.times.Sunrise}</span>
-                        </div>
-                        <div className="flex items-center justify-around">
-                            <h5>{handleTranslation('Sunset')}</h5>
-                            <span className="font-thin text-lg">{prayerData.data.times.Sunset}</span>
-                        </div>
-                    </div>
-                    <div className="bg-slate-600 col-span-2 p-3 flex flex-col justify-evenly rounded-md">
-                        <div className="flex justify-around items-center bg-slate-300 rounded-md text-slate-800 p-2 my-2">
-                            <img src="/assets/images/compass.svg" alt="Compass" className="w-8 h-8" />
+                    
+                    <div className="bg-slate-600/40 col-span-3 md:col-span-1 p-3 flex flex-col justify-evenly rounded-md">
+                        <div className="flex justify-around items-center bg-slate-300/70 rounded-md text-slate-800 p-2 my-2">
+                            <img src="/assets/icons/compass.svg" alt="Compass" className="w-8 h-8" />
                             <span><b>{prayerData.data.qibla.direction.degrees}°</b> {handleTranslation('From')} {handleDirectionTranslation(prayerData.data.qibla.direction.from)}</span>
                         </div>
-                        <div className="flex justify-around items-center bg-slate-300 rounded-md text-slate-800 p-2 my-3">
-                            <img src="/assets/images/kaaba.svg" alt="Kaaba" className="w-6 h-6" />
+                        <div className="flex justify-around items-center bg-slate-300/70 rounded-md text-slate-800 p-2 my-3">
+                            <img src="/assets/icons/kaaba.svg" alt="Kaaba" className="w-6 h-6" />
                             <span><b>{prayerData.data.qibla.distance.value} {prayerData.data.qibla.distance.unit}</b> {handleTranslation('From Kaaba')}</span>
                         </div>
                     </div>
@@ -280,8 +281,8 @@ export default function PrayerTimes(){
             {
                 error !== null 
                 &&
-                <div className="fixed inset-0 z-50 flex items-center justify-center w-1/2 mx-auto gap-5">
-                    <img src="./assets/images/warning.svg" alt="Warning" className="w-10 h-10"/>
+                <div className="absolute inset-x-0 top-0 h-52 md:inset-0 md:h-[calc(100vh-88px)] z-50 flex items-center justify-center w-1/2 mx-auto gap-4">
+                    <img src="./assets/icons/warning.svg" alt="Warning" className="w-10 h-10"/>
                     <h2 className="text-slate-200 mt-1">{error?.message}</h2>
                 </div>
             }

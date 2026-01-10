@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useLanguage } from "../context/languageContext"
-import { ARABICTRANSLATION } from "../constants/consts"
+import { ARABICTRANSLATION } from "../data/consts"
 
 export default function FastingTimes(){
 
@@ -172,11 +172,11 @@ export default function FastingTimes(){
     }
 
     return(
-        <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="w-full text-slate-200 p-4">
+        <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="relative w-full text-slate-200 p-4">
             {
                 isLoading
                 &&
-                <div className="fixed inset-0 z-50 flex items-center justify-center gap-4">
+                <div className="absolute inset-x-0 top-0 h-52 md:inset-0 md:h-[calc(100vh-88px)] z-50 flex items-center justify-center gap-4">
                     <div className="dot-spinner">
                         <div className="dot-spinner__dot"></div>
                         <div className="dot-spinner__dot"></div>
@@ -194,9 +194,9 @@ export default function FastingTimes(){
                 fastingData?.status === 'success' 
                 &&
                 <div className="text-slate-200">
-                    <h1>{handleTranslation("Fasting Times")}</h1>
+                    <h1 className="my-3">{handleTranslation("Fasting Times")}</h1>
                     <div className="mt-4">
-                        <h3 className="bg-slate-600/40 p-2 rounded-md font-light">
+                        <h3 className="bg-slate-600/40 text-center p-2 rounded-md font-light">
                             <span>{getDayFromDate(fastingData?.data.fasting[0].date)} </span>
                             <span>{getMonthFromDate(fastingData?.data.fasting[0].date, language === 'ar' && 'ar-EG')} </span>
                             <span>{getYearFromDate(fastingData?.data.fasting[0].date)}</span>
@@ -204,9 +204,9 @@ export default function FastingTimes(){
                         </h3> 
                         
                         <div className="bg-slate-600/20 rounded-md mb-3 p-3">
-                            <div className=" flex items-center justify-evenly rounded-md p-3 my-2">
+                            <div className="flex items-center justify-between md:justify-evenly rounded-md p-3 my-2">
                                 <div className="min-h-32 flex flex-col items-center justify-around p-2">
-                                    <img src="assets/images/sunrise.png" alt="Sahur" className="w-10 h-10 mb-2" />
+                                    <img src="assets/icons/sunrise.png" alt="Sahur" className="w-8 h-8 md:w-10 md:h-10 mb-2" />
                                     <span className="font-bold">{handleTranslation("Sahur")}</span>
                                     <span className="font-thin">{fastingData?.data.fasting[0].time.sahur}</span>
                                 </div>
@@ -215,14 +215,14 @@ export default function FastingTimes(){
                                     <span className="font-thin">{handleDuration(fastingData?.data.fasting[0].time.duration, language === 'ar' && 'ar-EG')}</span>
                                 </div>
                                 <div className="min-h-32 flex flex-col items-center justify-around p-2">
-                                    <img src="assets/images/sunset.png" alt="Iftar" className="w-10 h-10 mb-2" />
+                                    <img src="assets/icons/sunset.png" alt="Iftar" className="w-8 h-8 md:w-10 md:h-10 mb-2" />
                                     <span className="font-bold">{handleTranslation("Iftar")}</span>
                                     <span className="font-thin">{fastingData?.data.fasting[0].time.iftar}</span>
                                 </div>
                             </div>
                         </div>
                         <div className="bg-slate-600/80 rounded-md p-3 flex items-center justify-around">
-                            <h5 className="font-light">{handleTranslation("White days")}</h5>
+                            <span className="text-xl font-light">{handleTranslation("White days")}</span>
                             <span>
                                 <span className="font-thin">{getDayFromDate(fastingData?.data.white_days.days["13th"])}</span> , {' '}
                                 <span className="font-thin">{getDayFromDate(fastingData?.data.white_days.days["14th"])}</span> {handleTranslation("And")} {' '}
@@ -237,8 +237,8 @@ export default function FastingTimes(){
             {
                 error !== null 
                 &&
-                <div className="fixed inset-0 z-50 flex items-center justify-center w-1/2 mx-auto gap-5">
-                    <img src="./assets/images/warning.svg" alt="Warning" className="w-10 h-10"/>
+                <div className="absolute inset-x-0 top-0 h-52 md:inset-0 md:h-[calc(100vh-88px)] z-50 flex items-center justify-center w-1/2 mx-auto gap-4">
+                    <img src="./assets/icons/warning.svg" alt="Warning" className="w-10 h-10"/>
                     <h2 className="text-slate-200 mt-1">{error?.message}</h2>
                 </div>
             }

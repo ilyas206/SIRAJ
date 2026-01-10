@@ -30,6 +30,7 @@ export const ARABICTRANSLATION = {
   'Asma Husna': 'أسماء الله الحسنى',
   'Prayer Times': 'مواقيت الصلاة',
   'Fasting Times': 'مواقيت الصيام',
+  'Our scholars': 'علماؤنا',
   'Fajr': 'الفجر',
   'Sunrise': 'الشروق',
   'Dhuhr': 'الظهر',

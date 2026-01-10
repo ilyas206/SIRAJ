@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useLanguage } from "../context/languageContext"
-import { ARABICTRANSLATION } from "../constants/consts"
+import { ARABICTRANSLATION } from "../data/consts"
 
 export default function AsmaHusna(){
     const {language} = useLanguage()
@@ -46,11 +46,11 @@ export default function AsmaHusna(){
     }
 
     return(
-        <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="w-full text-slate-200 p-4">
+        <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="relative w-full text-slate-200 p-4">
             {
                 isLoading
                 &&
-                <div className="fixed inset-0 z-50 flex items-center justify-center gap-4">
+                <div className="absolute inset-x-0 top-0 h-52 md:inset-0 md:h-[calc(100vh-88px)] z-50 flex items-center justify-center gap-4">
                     <div className="dot-spinner">
                         <div className="dot-spinner__dot"></div>
                         <div className="dot-spinner__dot"></div>
@@ -68,19 +68,19 @@ export default function AsmaHusna(){
             {
                 asmaHusna?.status ===  'success' && 
                     <>
-                        <div className="flex items-center justify-between my-3">
+                        <div className="flex flex-col md:flex-row gap-3 items-center justify-between my-3">
                             <div>
                                 <h1 className="mt-4">{asmaHusna?.data.title}</h1>
                                 <p className="text-sm font-thin mb-3">{asmaHusna?.data.description}</p>
                             </div>
-                            <div className="w-2/5 bg-slate-600 p-3 rounded-tl-3xl rounded-md">
+                            <div className="w-full md:w-2/5 bg-slate-600 p-3 rounded-tl-3xl rounded-md">
                                 <p className="text-sm font-thin">{asmaHusna?.data.recitation_benefits}</p>
                                 <p className="font-bold">{asmaHusna?.data.hadith}</p>
                             </div>
                         </div>
                         <div className="w-full flex flex-wrap justify-around gap-y-3 mt-5">
                             {asmaHusna?.data.names.map(ism => {
-                                return <div key={ism.number} className="bg-slate-600 rounded-md p-3 text-center w-[32%] relative">
+                                return <div key={ism.number} className="bg-slate-600 rounded-md p-3 text-center w-full md:w-[32%] relative">
                                     <span className="text-slate-200 opacity-40 absolute right-3 top-3">{ism.number}</span>
                                     <h3 className="font-bold mt-3">{language === 'en' ? ism.transliteration : ism.name }</h3>
                                     {
@@ -96,8 +96,8 @@ export default function AsmaHusna(){
             {
                 error !== null 
                 &&
-                <div className="fixed inset-0 z-50 flex items-center justify-center w-1/2 mx-auto gap-5">
-                    <img src="./assets/images/warning.svg" alt="Warning" className="w-10 h-10"/>
+                <div className="absolute inset-x-0 top-0 h-52 md:inset-0 md:h-[calc(100vh-88px)] z-50 flex items-center justify-center w-1/2 mx-auto gap-4">
+                    <img src="./assets/icons/warning.svg" alt="Warning" className="w-10 h-10"/>
                     <h2 className="text-slate-200 mt-1">{handleErrorTranslation(error?.message)}</h2>
                 </div>
             }   
