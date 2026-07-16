@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useLanguage } from "../context/languageContext"
 import { ARABICTRANSLATION } from "../data/consts"
 import gsap from "gsap"
@@ -39,7 +39,7 @@ export default function AsmaHusna(){
         })
     }, [asmaHusna])
 
-    const fetchAsmaHusna = async () => {
+    const fetchAsmaHusna = useCallback(async () => {
         setAsmaHusna(null)
         setIsLoading(true)
         setError(null)
@@ -54,11 +54,11 @@ export default function AsmaHusna(){
         } finally {
             setIsLoading(false)
         }
-    }
+    }, [API_KEY, language])
 
     useEffect(() => {
         fetchAsmaHusna()
-    },[language])
+    }, [fetchAsmaHusna])
 
     const handleTranslation = (key) => {
         if(language === 'ar'){

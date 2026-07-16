@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { ARABICTRANSLATION, PRAYER_METHODS } from "../data/consts"
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -55,7 +55,7 @@ export default function PrayerTimes(){
         return prayerData.data.date.hijri.month.en
     }
 
-    const getCurrentLocation = () => {
+    const getCurrentLocation = useCallback(() => {
         return new Promise((resolve, reject) => {
             if (!navigator.geolocation) {
                 reject(new Error('Geolocation not supported'));
@@ -72,9 +72,9 @@ export default function PrayerTimes(){
             (error) => reject(error.message || error)
             );
         });
-    }
+    }, [])
 
-    const fetchPrayerTimes = async (latitude, longitude) => {
+    const fetchPrayerTimes = useCallback(async (latitude, longitude) => {
         setPrayerData(null)
         setError(null)
         try {
@@ -88,7 +88,7 @@ export default function PrayerTimes(){
         } finally {
             setIsLoading(false)
         }
-    }
+    }, [API_KEY, selectedMethod])
 
     useEffect(() => {
     (async () => {
@@ -100,7 +100,7 @@ export default function PrayerTimes(){
             setError(error)
         }
     })();
-    }, [selectedMethod]);
+    }, [fetchPrayerTimes, getCurrentLocation]);
 
     const handleMethodChange = e => {
         setSelectedMethod(parseInt(e.target.value))

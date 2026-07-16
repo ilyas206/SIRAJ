@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useLanguage } from "../context/languageContext"
 import { ARABICTRANSLATION } from "../data/consts"
 
@@ -18,7 +18,7 @@ export default function FastingTimes(){
         return key
     }
 
-    const getCurrentLocation = () => {
+    const getCurrentLocation = useCallback(() => {
         return new Promise((resolve, reject) => {
             if (!navigator.geolocation) {
                 reject(new Error('Geolocation not supported'));
@@ -35,9 +35,9 @@ export default function FastingTimes(){
             (error) => reject(error.message || error)
             );
         });
-    }
+    }, [])
 
-    const fetchFastingTimes = async (latitude, longitude) => {
+    const fetchFastingTimes = useCallback(async (latitude, longitude) => {
         setFastingData(null)
         setError(null)
         try {
@@ -51,7 +51,7 @@ export default function FastingTimes(){
         } finally {
             setIsLoading(false)
         }
-    }
+    }, [API_KEY])
 
     useEffect(() => {
     (async () => {
@@ -63,7 +63,7 @@ export default function FastingTimes(){
             setError(error)
         }
     })();
-    }, []);
+    }, [fetchFastingTimes, getCurrentLocation]);
 
     const getDayFromDate = dateString => {
         if(isNaN(Number(dateString.split("-")[2]))){
