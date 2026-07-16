@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react"
 import { useLanguage } from "../context/languageContext"
 import { ARABICTRANSLATION } from "../data/consts"
+import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
+import { ScrollTrigger } from "gsap/ScrollTrigger" 
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function AsmaHusna(){
     const {language} = useLanguage()
@@ -9,6 +14,30 @@ export default function AsmaHusna(){
     const [error, setError] = useState(null)
 
     const API_KEY = process.env.REACT_APP_ISLAMIC_API_KEY
+
+    useGSAP(() => {
+        if (!asmaHusna?.data?.names) return;
+
+        gsap.utils.toArray('.asma-card').forEach(card => {
+            gsap.from(card, {
+                opacity : 0,
+                y : 100,
+                scale : .5,
+                scrollTrigger :{
+                    trigger : card,
+                    start : "top bottom",
+                    end : "bottom 75%",
+                    scrub : 1,
+                    toggleActions : "play reverse play reverse"
+                }
+            })
+        })
+
+        gsap.from('.header', {
+            y : 100,
+            opacity : 0
+        })
+    }, [asmaHusna])
 
     const fetchAsmaHusna = async () => {
         setAsmaHusna(null)
@@ -68,7 +97,7 @@ export default function AsmaHusna(){
             {
                 asmaHusna?.status ===  'success' && 
                     <>
-                        <div className="flex flex-col md:flex-row gap-3 items-center justify-between my-3">
+                        <div className="header flex flex-col md:flex-row gap-3 items-center justify-between my-3">
                             <div>
                                 <h1 className="mt-4">{asmaHusna?.data.title}</h1>
                                 <p className="text-sm font-thin mb-3">{asmaHusna?.data.description}</p>
@@ -80,7 +109,7 @@ export default function AsmaHusna(){
                         </div>
                         <div className="w-full flex flex-wrap justify-around gap-y-3 mt-5">
                             {asmaHusna?.data.names.map(ism => {
-                                return <div key={ism.number} className="bg-slate-600 rounded-md p-3 text-center w-full md:w-[32%] relative">
+                                return <div key={ism.number} className="asma-card bg-slate-600 rounded-md p-3 text-center w-full md:w-[32%] relative">
                                     <span className="text-slate-200 opacity-40 absolute right-3 top-3">{ism.number}</span>
                                     <h3 className="font-bold mt-3">{language === 'en' ? ism.transliteration : ism.name }</h3>
                                     {
@@ -90,6 +119,7 @@ export default function AsmaHusna(){
                                 </div>
                             })}
                         </div>
+                        <div className="h-60 text-center"></div>
                     </>
             }
 

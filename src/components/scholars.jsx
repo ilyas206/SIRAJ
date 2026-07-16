@@ -2,14 +2,39 @@ import { useState } from "react";
 import { scholars, categories } from "../data/islamicScholars";
 import { useLanguage } from "../context/languageContext";
 import { Link } from "react-router-dom";
+import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
+import { ScrollTrigger } from "gsap/ScrollTrigger" 
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function Scholars(){
     const [selectedCategory, setSelectedCategory] = useState('All')
     const {language} = useLanguage()
 
+
     const filteredScholars = selectedCategory === 'All'
     ? scholars 
     : scholars.filter(s => s.field.includes(selectedCategory))
+
+    // useGSAP(() => {
+    //     if (!filteredScholars) return;
+
+    //     gsap.utils.toArray('.scholar').forEach(scholar => {
+    //         gsap.from(scholar, {
+    //             opacity : 0,
+    //             scrollTrigger :{
+    //                 trigger : scholar,
+    //                 start : "top bottom",
+    //                 end : "bottom 75%",
+    //                 // scrub : 1,
+    //                 markers : true,
+    //                 toggleActions : "play reverse play reverse"
+    //             }
+    //         })
+    //     })
+
+    // }, [filteredScholars])
 
     return(
         <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="w-full text-slate-200 p-4">
@@ -39,7 +64,7 @@ export default function Scholars(){
                 {
                     filteredScholars.map(scholar => {
                         return(
-                            <div key={scholar.id} className="w-full flex flex-col justify-center flex-grow-1 md:w-[48%] bg-slate-700/40 hover:bg-slate-600/40 transition duration-300 backdrop-blur p-6 rounded-md text-center">
+                            <div key={scholar.id} className="scholar w-full flex flex-col justify-center flex-grow-1 md:w-[48%] bg-slate-700/40 hover:bg-slate-600/40 transition duration-300 backdrop-blur p-6 rounded-md text-center">
                                 <Link to={`/scholars/${scholar.id}`} className="no-underline text-slate-200 cursor-pointer">
                                     <h3 className="font-bold">{scholar.name[language]}</h3>
                                 </Link>
