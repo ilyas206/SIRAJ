@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import { useLanguage } from "../context/languageContext";
 import { ARABICTRANSLATION } from "../data/consts";
-import { Compass, Home, House, Moon, Sparkles, UserStar } from "lucide-react";
+import { Compass, House, Moon, Sparkles, UserStar } from "lucide-react";
 
 export default function Layout(){
 
