@@ -73,23 +73,23 @@ export default function ScholarDetails(){
     })
 
     return(
-        <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="bg-slate-600/20 text-slate-200 p-3">
+        <div dir={language === 'ar' ? 'rtl' : 'ltr'} className="text-slate-200 p-3 mt-5 md:mt-2">
             <div className="flex flex-col md:flex-row justify-around gap-3 md:gap-0 w-[95%] mt-2 mx-3">
-                <div className="flex flex-col justify-center gap-10 w-full md:w-2/3 px-3 ">
+                <div className="flex flex-col justify-center text-center gap-10 w-full md:w-2/3 px-3 ">
                     <div>
                         <span className="legacy italic text-sm font-thin">{scholar.legacy[language]}</span>
-                        <h1 className="name font-extrabold text-5xl my-2">{scholar.name[language]}</h1>
+                        <h1 className="name font-extrabold text-3xl md:text-5xl my-2">{scholar.name[language]}</h1>
                         <p className="title font_kufi text-xl mt-3">{scholar.title[language]}</p>
-                        <div className="birth bg-slate-600/20 rounded-md p-2 font-light w-fit">
+                        <div className="birth mx-auto bg-slate-600/20 rounded-md p-2 font-light w-fit">
                             <span>{language === 'ar' ? 'ولد في' : 'Born in'} {scholar.birthplace[language]}</span>
                         </div>
                     </div>
                     
-                    <div className="flex items-center justify-center md:justify-start gap-2 mt-2">
-                        <span id="fieldsSpan">{language === 'ar' ? 'المجالات : ' : 'Fields : '}</span>
+                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                        <span className="hidden md:inline" id="fieldsSpan">{language === 'ar' ? 'المجالات : ' : 'Fields : '}</span>
                         {
                             scholar.field.map(f => {
-                                return <span key={f} className="field bg-slate-600/20 p-2 rounded-md">{language === 'ar' ? categorieMapping[f]?.ar : categorieMapping[f]?.en}</span>
+                                return <span key={f} className="field flex-1 text-center bg-slate-600/20 p-2 rounded-md">{language === 'ar' ? categorieMapping[f]?.ar : categorieMapping[f]?.en}</span>
                             })
                         }
                     </div>
@@ -103,7 +103,7 @@ export default function ScholarDetails(){
             <div id="achievements" className="flex flex-col md:flex-row gap-2 w-full mt-6">
                 <div className="w-full text-center">
                     <h3 className="bg-slate-600/20 p-2 text-center rounded-md">{language === 'ar' ? 'من مساهماته': 'From his contributions'}</h3>
-                        <ul className="list-disc list-inside">
+                        <ul className="list-disc md:list-inside">
                             {
                                 scholar.contributions[language].map(c => <li key={c} className="font-light">{c}</li>)
                             }

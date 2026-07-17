@@ -111,7 +111,7 @@ export default function PrayerTimes(){
             {
                 isLoading
                 &&
-                <div className="absolute inset-x-0 top-0 h-52 md:inset-0 md:h-[calc(100vh-88px)] z-50 flex items-center justify-center gap-4">
+                <div className="absolute inset-x-0 top-0 h-screen md:inset-0 md:h-[calc(100vh-88px)] z-50 flex items-center justify-center gap-4">
                     <div className="dot-spinner">
                         <div className="dot-spinner__dot"></div>
                         <div className="dot-spinner__dot"></div>
@@ -128,7 +128,7 @@ export default function PrayerTimes(){
             {
                 prayerData?.status === 'success' 
                 &&
-                <div className="w-full grid grid-cols-1 md:grid-cols-[48%_25%_25%] gap-2">
+                <div className="w-full grid grid-cols-1 md:grid-cols-[48%_25%_25%] gap-2 mt-5">
                     <div className="col-span-3 my-3">
                         <span className="font-thin">{handleTranslation('Prayer Times in')}</span>
                         <h1 className="my-1">{prayerData.data.timezone.name}</h1>
@@ -207,10 +207,10 @@ export default function PrayerTimes(){
                         <h4 className="font-thin text-lg">{handleMonthTranslation()}</h4>
                     </div>
                     <div className="bg-slate-600/40 col-span-3 md:col-span-2 p-3 flex flex-col items-center justify-center rounded-md">
-                        <h3 className="flex items-center gap-3"><img src="/assets/icons/world.svg" alt="World map" className="w-8 h-8" /> {prayerData.data.timezone.name} {prayerData.data.timezone.utc_offset} {prayerData.data.timezone.abbreviation}</h3>
-                        <h3 className="font-thin text-lg flex items-center gap-2"><img src="/assets/icons/calendar.svg" alt="World map" className="w-5 h-5" />{handleDateTranslation()}</h3>
+                        <h3 className="flex items-center text-lg md:text-2xl gap-3"><img src="/assets/icons/world.svg" alt="World map" className="w-6 h-6 md:w-8 md:h-8" /> {prayerData.data.timezone.name} {prayerData.data.timezone.utc_offset} {prayerData.data.timezone.abbreviation}</h3>
+                        <h3 className="font-thin text-sm md:text-lg flex items-center gap-2"><img src="/assets/icons/calendar.svg" alt="World map" className="w-5 h-5" />{handleDateTranslation()}</h3>
                     </div>
-                    <div className="bg-slate-600/40 col-span-3 flex justify-around items-center p-3 rounded-md">
+                    <div className="bg-slate-600/40 col-span-3 grid grid-cols-3 md:flex justify-around items-center p-3 rounded-md">
                         <div className="flex flex-col justify-center items-center p-3">
                             <img src="assets/icons/sunrise.png" alt="Fajr prayer" className="w-8 h-8 md:w-10 md:h-10 mb-2" />
                             <p className="font-bold">{handleTranslation('Fajr')}</p>
@@ -248,7 +248,7 @@ export default function PrayerTimes(){
                         </div>
                     </div>
                     <div className="bg-slate-600/40 row-span-2 col-span-3 md:col-span-2 flex flex-col justify-around p-3 rounded-md">
-                        <h3 className="flex items-center gap-2">{handleTranslation('Prohibited Times')} <img src="/assets/icons/prohibition.svg" alt="Prohibition" className="w-8 h-8" /></h3>
+                        <h3 className="flex items-center gap-2">{handleTranslation('Prohibited Times')} <img src="/assets/icons/prohibition.svg" alt="Prohibition" className="w-6 h-6 md:w-8 md:h-8" /></h3>
                         <h5 className="text-base md:text-lg font-light">{handleTranslation('Sunrise')}</h5>
                         <div className="flex justify-around items-center bg-slate-300/70 rounded-md text-slate-800 p-2 my-1">
                             <span className="font-bold">{handleTranslation('Start')} - {prayerData.data.prohibited_times.sunrise.start}</span>

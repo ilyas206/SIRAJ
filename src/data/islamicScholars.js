@@ -1,5 +1,5 @@
 export const categories = [
-    { id:'All', en: 'All Fields', ar: 'جميع المجالات', icon: 'assets/icons/all.png' },//0
+    { id:'All', en: 'All Fields', ar: 'الكل', icon: 'assets/icons/all.png' },//0
     { id: 'Mathematics', en: 'Mathematics', ar: 'الرياضيات', icon: 'assets/icons/maths.png' },//1
     { id: 'Astronomy', en: 'Astronomy', ar: 'الفلك', icon: 'assets/icons/astronomy.png' },//2
     { id: 'Medicine', en: 'Medicine', ar: 'الطب', icon: 'assets/icons/medicine.png' },//3

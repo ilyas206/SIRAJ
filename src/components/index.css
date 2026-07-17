@@ -41,6 +41,24 @@
   z-index: 2;
 }
 
+@media screen and (max-width: 640px) {
+  .fanoos-wrapper {
+    position: absolute;
+    top: 0;          
+    right: 32px;     
+    z-index: 10;
+    transform-origin: top center;
+    animation: naturalSwing 6s ease-in-out infinite;
+  }
+
+  .fanoos {
+    width: 50px;
+    opacity: 0.8;
+    position: relative;
+    z-index: 2;
+  }
+}
+
 /* THE CORD */
 .fanoos-wrapper::before {
   content: "";

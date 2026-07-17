@@ -79,7 +79,7 @@ export default function AsmaHusna(){
             {
                 isLoading
                 &&
-                <div className="absolute inset-x-0 top-0 h-52 md:inset-0 md:h-[calc(100vh-88px)] z-50 flex items-center justify-center gap-4">
+                <div className="absolute inset-x-0 top-0 h-screen md:inset-0 md:h-[calc(100vh-88px)] z-50 flex items-center justify-center gap-4">
                     <div className="dot-spinner">
                         <div className="dot-spinner__dot"></div>
                         <div className="dot-spinner__dot"></div>
