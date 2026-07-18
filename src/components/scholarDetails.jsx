@@ -103,7 +103,7 @@ export default function ScholarDetails(){
             <div id="achievements" className="flex flex-col md:flex-row gap-2 w-full mt-6">
                 <div className="w-full text-center">
                     <h3 className="bg-slate-600/20 p-2 text-center rounded-md">{language === 'ar' ? 'من مساهماته': 'From his contributions'}</h3>
-                        <ul className="list-disc md:list-inside">
+                        <ul className={`list-disc ${language === 'ar' && 'list-inside'}`}>
                             {
                                 scholar.contributions[language].map(c => <li key={c} className="font-light">{c}</li>)
                             }
